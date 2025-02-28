@@ -13,7 +13,6 @@ func _physics_process(delta):
 	pass
 
 func _on_body_entered(body):
-	var actor = body.get_node("TakeDamageComponent")
-	if actor:
-		actor.take_damage( host.power )
+	if body.has_method( "take_damage" ):
+		body.take_damage( host.power )
 	host.queue_free()

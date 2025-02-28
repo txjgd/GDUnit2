@@ -10,7 +10,6 @@ var in_range :bool = false
 func _ready() -> void:
 	connect( "body_entered", _on_body_entered )
 	connect( "body_exited", _on_body_exited )
-	print( "signals connected" )
 	pass
 	
 func _process( delta :float ) -> void:
@@ -21,7 +20,6 @@ func is_in_range() -> bool:
 	return in_range
 
 func _on_body_entered(body):
-	print( body, " entered range" )
 	if body == target:
 		in_range = true
 

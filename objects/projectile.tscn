@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://cepaoatkghejq"]
+[gd_scene load_steps=5 format=3 uid="uid://cepaoatkghejq"]
 
+[ext_resource type="Script" path="res://scripts/projectile.gd" id="1_3yxfc"]
 [ext_resource type="Texture2D" uid="uid://c45mn4nggkmea" path="res://assets/other/For Items2_Potato.png" id="1_jgi1c"]
 [ext_resource type="Script" path="res://components/straight_mover_component.gd" id="2_38vef"]
 
@@ -9,6 +10,7 @@ radius = 5.0
 [node name="Projectile" type="Area2D"]
 collision_layer = 4
 collision_mask = 9
+script = ExtResource("1_3yxfc")
 
 [node name="Visual" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)

@@ -1,3 +1,4 @@
+class_name StunFoeState
 extends StateComponent
 
 @export var animations :AnimationPlayer
@@ -9,7 +10,7 @@ var cooldown :float = 0
 
 func enter( prev :StateComponent ) -> void:
 	cooldown = stun_time
-	animations.play( "stun" )
+	animations.play( "shake" )
 
 
 func running( delta :float ) -> StateComponent:
