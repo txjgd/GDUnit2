@@ -16,4 +16,5 @@ func running( delta :float ) -> StateComponent:
 	
 	host.velocity = sensor.direction * speed
 	host.move_and_slide()
+
 	return null
