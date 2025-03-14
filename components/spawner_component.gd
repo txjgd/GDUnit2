@@ -1,10 +1,10 @@
-class_name PickupSpawnComponent
+class_name SpawnerComponent
 extends Node
 
 signal no_more_pickups
 
 @export var spawn_count :int = 10
-@export var pickup :PackedScene
+@export var object :PackedScene
 @export var spawn_node :Node
 
 var rng = RandomNumberGenerator.new()
@@ -31,14 +31,14 @@ func spawn() -> void:
 		emit_signal("no_more_pickups")
 		return
 
+
 	var places = get_child_count()
 	var place = rng.randi_range( 0, places - 1 )
 	var child = get_child( place )
-	var obj = pickup.instantiate()
+	var obj = object.instantiate()
 
 	spawn_node.add_child( obj )
 	obj.global_position = child.global_position
 	obj.spawner = self
 
 	spawn_count -= 1
-	pass

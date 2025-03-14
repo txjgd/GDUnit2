@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://p28krnp2ox7d" path="res://objects/player.tscn" id="2_byt2v"]
 [ext_resource type="PackedScene" uid="uid://bfegvcssuo345" path="res://objects/foe.tscn" id="3_nl877"]
 [ext_resource type="PackedScene" uid="uid://d30tmrxlyd3jd" path="res://objects/pickup.tscn" id="4_dwpvj"]
-[ext_resource type="Script" path="res://components/pickup_spawn_component.gd" id="4_slcuq"]
+[ext_resource type="Script" path="res://components/spawner_component.gd" id="4_slcuq"]
 
 [node name="Zone1" type="Node2D"]
 
@@ -18,6 +18,8 @@ tile_map_data = PackedByteArray("AACw/8j/AAAPAAoAAACw/8n/AAAPAAsAAACx/8j/AAAPAAo
 tile_set = ExtResource("1_nffip")
 
 [node name="Player" parent="." instance=ExtResource("2_byt2v")]
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
 
 [node name="MoveConfigComponent" parent="Player" index="2"]
 speed = 150.0
@@ -26,40 +28,111 @@ speed = 150.0
 container = NodePath("../../Projectiles")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(4, 4)
-
-[node name="Projectiles" type="Node" parent="."]
+zoom = Vector2(2, 2)
 
 [node name="Mobs" type="Node" parent="."]
 
-[node name="Foe" parent="Mobs" instance=ExtResource("3_nl877")]
-position = Vector2(-162, 41)
+[node name="Foe1" parent="Mobs" instance=ExtResource("3_nl877")]
+position = Vector2(-140, 0)
 metadata/_edit_group_ = true
 
-[node name="AreaSenseComponent" parent="Mobs/Foe" index="6" node_paths=PackedStringArray("target")]
+[node name="AreaSenseComponent" parent="Mobs/Foe1" index="6" node_paths=PackedStringArray("target")]
 target = NodePath("../../../Player")
 
-[node name="CollisionShape2D" parent="Mobs/Foe/AreaSenseComponent" index="0"]
+[node name="CollisionShape2D" parent="Mobs/Foe1/AreaSenseComponent" index="0"]
 metadata/_edit_lock_ = true
 
-[node name="PickupSpawnComponent" type="Node" parent="." node_paths=PackedStringArray("spawn_node")]
+[node name="GotoPostState" parent="Mobs/Foe1/StateMachineComponent" index="3" node_paths=PackedStringArray("marker")]
+marker = NodePath("../../../../Posts/Post1")
+
+[node name="Foe2" parent="Mobs" instance=ExtResource("3_nl877")]
+position = Vector2(140, 0)
+metadata/_edit_group_ = true
+
+[node name="AreaSenseComponent" parent="Mobs/Foe2" index="6" node_paths=PackedStringArray("target")]
+target = NodePath("../../../Player")
+
+[node name="CollisionShape2D" parent="Mobs/Foe2/AreaSenseComponent" index="0"]
+metadata/_edit_lock_ = true
+
+[node name="GotoPostState" parent="Mobs/Foe2/StateMachineComponent" index="3" node_paths=PackedStringArray("marker")]
+marker = NodePath("../../../../Posts/Post2")
+
+[node name="Foe3" parent="Mobs" instance=ExtResource("3_nl877")]
+position = Vector2(0, -140)
+metadata/_edit_group_ = true
+
+[node name="AreaSenseComponent" parent="Mobs/Foe3" index="6" node_paths=PackedStringArray("target")]
+target = NodePath("../../../Player")
+
+[node name="CollisionShape2D" parent="Mobs/Foe3/AreaSenseComponent" index="0"]
+metadata/_edit_lock_ = true
+
+[node name="GotoPostState" parent="Mobs/Foe3/StateMachineComponent" index="3" node_paths=PackedStringArray("marker")]
+marker = NodePath("../../../../Posts/Post3")
+
+[node name="Foe4" parent="Mobs" instance=ExtResource("3_nl877")]
+position = Vector2(0, 140)
+metadata/_edit_group_ = true
+
+[node name="AreaSenseComponent" parent="Mobs/Foe4" index="6" node_paths=PackedStringArray("target")]
+target = NodePath("../../../Player")
+
+[node name="CollisionShape2D" parent="Mobs/Foe4/AreaSenseComponent" index="0"]
+metadata/_edit_lock_ = true
+
+[node name="GotoPostState" parent="Mobs/Foe4/StateMachineComponent" index="3" node_paths=PackedStringArray("marker")]
+marker = NodePath("../../../../Posts/Post4")
+
+[node name="SpawnerComponent" type="Node" parent="." node_paths=PackedStringArray("spawn_node")]
 script = ExtResource("4_slcuq")
-pickup = ExtResource("4_dwpvj")
+object = ExtResource("4_dwpvj")
 spawn_node = NodePath("../SpawnPoint")
 
-[node name="Marker2D" type="Marker2D" parent="PickupSpawnComponent"]
-position = Vector2(1, -43)
+[node name="Marker2D" type="Marker2D" parent="SpawnerComponent"]
+position = Vector2(0, -50)
 
-[node name="Marker2D2" type="Marker2D" parent="PickupSpawnComponent"]
-position = Vector2(56, 16)
+[node name="Marker2D8" type="Marker2D" parent="SpawnerComponent"]
+position = Vector2(50, 0)
 
-[node name="Marker2D3" type="Marker2D" parent="PickupSpawnComponent"]
-position = Vector2(6, 71)
+[node name="Marker2D6" type="Marker2D" parent="SpawnerComponent"]
+position = Vector2(-50, 0)
 
-[node name="Marker2D4" type="Marker2D" parent="PickupSpawnComponent"]
-position = Vector2(-79, 1)
+[node name="Marker2D2" type="Marker2D" parent="SpawnerComponent"]
+position = Vector2(-50, -50)
+
+[node name="Marker2D3" type="Marker2D" parent="SpawnerComponent"]
+position = Vector2(50, -50)
+
+[node name="Marker2D4" type="Marker2D" parent="SpawnerComponent"]
+position = Vector2(-50, 50)
+
+[node name="Marker2D5" type="Marker2D" parent="SpawnerComponent"]
+position = Vector2(0, 50)
+
+[node name="Marker2D7" type="Marker2D" parent="SpawnerComponent"]
+position = Vector2(50, 50)
+
+[node name="Posts" type="Node" parent="."]
+
+[node name="Post1" type="Marker2D" parent="Posts"]
+position = Vector2(-140, 0)
+
+[node name="Post2" type="Marker2D" parent="Posts"]
+position = Vector2(140, 0)
+
+[node name="Post3" type="Marker2D" parent="Posts"]
+position = Vector2(0, -140)
+
+[node name="Post4" type="Marker2D" parent="Posts"]
+position = Vector2(0, 140)
+
+[node name="Projectiles" type="Node" parent="."]
 
 [node name="SpawnPoint" type="Node" parent="."]
 
 [editable path="Player"]
-[editable path="Mobs/Foe"]
+[editable path="Mobs/Foe1"]
+[editable path="Mobs/Foe2"]
+[editable path="Mobs/Foe3"]
+[editable path="Mobs/Foe4"]

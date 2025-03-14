@@ -19,6 +19,12 @@ func _process( delta :float ) -> void:
 func is_in_range() -> bool:
 	return in_range
 
+func distance() -> float:
+	if in_range:
+		return host.position.distance_to( target.position )
+	else:
+		return 0
+
 func _on_body_entered(body):
 	if body == target:
 		in_range = true
