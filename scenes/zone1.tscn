@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=4 uid="uid://c3ndqa1xsjbn5"]
+[gd_scene load_steps=7 format=4 uid="uid://c3ndqa1xsjbn5"]
 
 [ext_resource type="TileSet" uid="uid://ixudtwf5mhpv" path="res://resources/kenney_rogue_like.tres" id="1_nffip"]
 [ext_resource type="PackedScene" uid="uid://p28krnp2ox7d" path="res://objects/player.tscn" id="2_byt2v"]
 [ext_resource type="PackedScene" uid="uid://bfegvcssuo345" path="res://objects/foe.tscn" id="3_nl877"]
 [ext_resource type="PackedScene" uid="uid://d30tmrxlyd3jd" path="res://objects/pickup.tscn" id="4_dwpvj"]
+[ext_resource type="PackedScene" uid="uid://cipq26x7x55b5" path="res://objects/foe_thrower.tscn" id="4_gpqj4"]
 [ext_resource type="Script" path="res://components/spawner_component.gd" id="4_slcuq"]
 
 [node name="Zone1" type="Node2D"]
@@ -84,6 +85,17 @@ metadata/_edit_lock_ = true
 [node name="GotoPostState" parent="Mobs/Foe4/StateMachineComponent" index="3" node_paths=PackedStringArray("marker")]
 marker = NodePath("../../../../Posts/Post4")
 
+[node name="Foe" parent="Mobs" instance=ExtResource("4_gpqj4")]
+position = Vector2(-187, -157)
+metadata/_edit_group_ = true
+
+[node name="AreaSenseComponent" parent="Mobs/Foe" index="6" node_paths=PackedStringArray("target")]
+target = NodePath("../../../Player")
+range = 250.0
+
+[node name="ThrowingState" parent="Mobs/Foe/StateMachineComponent" index="2" node_paths=PackedStringArray("container")]
+container = NodePath("../../../../Projectiles")
+
 [node name="SpawnerComponent" type="Node" parent="." node_paths=PackedStringArray("spawn_node")]
 script = ExtResource("4_slcuq")
 object = ExtResource("4_dwpvj")
@@ -136,3 +148,4 @@ position = Vector2(0, 140)
 [editable path="Mobs/Foe2"]
 [editable path="Mobs/Foe3"]
 [editable path="Mobs/Foe4"]
+[editable path="Mobs/Foe"]

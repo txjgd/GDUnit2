@@ -29,7 +29,7 @@ grow_horizontal = 2
 
 [node name="Label" type="Label" parent="CenterContainer"]
 layout_mode = 2
-text = "Game Over"
+text = "You Lose, Game Over"
 label_settings = SubResource("LabelSettings_or801")
 horizontal_alignment = 1
 

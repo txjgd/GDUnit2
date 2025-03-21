@@ -3,11 +3,13 @@ extends Area2D
 
 @export var host :CharacterBody2D
 @export var target :CharacterBody2D
+@export var range :float = 125
 
 var direction :Vector2
 var in_range :bool = false
 
 func _ready() -> void:
+	$CollisionShape2D.shape.radius = range
 	connect( "body_entered", _on_body_entered )
 	connect( "body_exited", _on_body_exited )
 	pass

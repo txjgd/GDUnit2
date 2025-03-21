@@ -4,7 +4,7 @@ extends StateComponent
 
 @export var sensor :AreaSenseComponent
 @export var chasing :ChasingFoeState
-@export var idle   :IdleFoeStatement
+@export var idle   :IdleFoeState
 @export var speed  :float = 75
 @export var marker :Marker2D
 

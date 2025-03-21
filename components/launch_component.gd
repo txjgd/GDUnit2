@@ -16,6 +16,10 @@ var cooldown :float = 0
 func launch() -> Node2D:
 	if cooldown > 0:
 		return null
+	
+	var dir = aim.get_aim_direction()
+	if dir.x == 0 and dir.y == 0: 
+		return null
 		
 	var proj = projectile.instantiate()
 	container.add_child( proj )
@@ -23,7 +27,7 @@ func launch() -> Node2D:
 	
 	var move = proj.get_node("StraightMoverComponent")
 	if move:
-		move.Direction = aim.get_aim_direction()
+		move.Direction = dir
 	cooldown = rate
 	return proj
 	
