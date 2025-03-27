@@ -7,6 +7,7 @@ extends StateComponent
 @export var goback :StateComponent
 @export var speed  :float = 100
 @export var rate :float = 1.0
+
 @export var container :Node
 
 var cooldown :float = 0
